@@ -1,4 +1,3 @@
-2
 import json
 from core.user import UserStore
 from core.purchases import PurchaseStore
@@ -83,7 +82,5 @@ def menu():
             break
         else:
             print('Opção inválida')
-
-
 if __name__ == '__main__':
     menu()
