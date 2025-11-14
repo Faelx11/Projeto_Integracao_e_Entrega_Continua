@@ -60,19 +60,16 @@ def menu():
             item = input('Item (ex: camiseta, calça): ').strip()
             color = input('Cor: ').strip()
             price = float(input('Preço: ').strip())
-            # Recognizer will try to find matching user
             matched_uid = recognizer.recognize_by_purchase({'item': item, 'color': color, 'price': price})
             if matched_uid:
                 print(f'Compra associada ao usuário (anônimo) id: {matched_uid}')
                 purchase_store.create_purchase(user_id=matched_uid, item=item, color=color, price=price)
             else:
-                # create new anonymous profile
                 new_user = user_store.create_user(name='[anon]')
                 purchase_store.create_purchase(user_id=new_user['id'], item=item, color=color, price=price)
                 print(f'Nenhum perfil compatível. Novo perfil criado: {new_user["id"]}')
             save_stores(user_store, purchase_store)
         elif choice == '4':
-            # show purchases with anonymized identifiers based on style index
             public = recognizer.public_view()
             print('\n-- Compras públicas --')
             for p in public:
@@ -82,5 +79,6 @@ def menu():
             break
         else:
             print('Opção inválida')
+            
 if __name__ == '__main__':
     menu()
